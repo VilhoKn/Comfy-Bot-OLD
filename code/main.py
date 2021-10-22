@@ -46,6 +46,18 @@ with open("code/files/bunny_image_links.txt", "r") as f:
 	for i in f_lines:
 		BUNNY_IMAGE.append(i.strip("\n"))
 
+with open("code/files/meme_links.txt", "r") as f:
+	f_lines = f.readlines()
+	MEMES = []
+	for i in f_lines:
+		MEMES.append(i.strip("\n"))
+
+with open("code/files/cheerup_links.txt", "r") as f:
+	f_lines = f.readlines()
+	CHEERUP = []
+	for i in f_lines:
+		CHEERUP.append(i.strip("\n"))
+
 #OTHER VARIABLES
 
 värit = {"red" : 0xfc9a9a, "orange" : 0xf8be92, "yellow" : 0xfcefa9, "green" : 0xacebb9, "blue" : 0xafd1f8, "purple" : 0xd5bcf3, "pink" : 0xf5bad5, "black" : 0x000000, "white" : 0xFFFFFF}
@@ -82,7 +94,7 @@ async def on_message(message):
 	temp_msg = message.content.lower().split(" ")
 	for i in temp_msg:
 		if i in ON_MESSAGE_TRIGGER_WORDS:
-			viesti = discord.Embed(title="Depression Help", description = f"Hey, I saw you were talking about depressing things on {message.guild} and wanted to say that there are people that love and care about you!\n\nIf you want information about helplines for depressed and suicidal people use command `/ineedhelp`", color = c)
+			viesti = discord.Embed(title="Depression Help", description = f"Hey, I saw you were talking about depressing things on {message.guild} and wanted to say that there are people that love and care about you! Hope you are okay.\n\nIf you want information about helplines for depressed and suicidal people use command `/ineedhelp`", color = c)
 			try:
 				channel = await message.author.create_dm()
 				await channel.send(embed=viesti)
@@ -138,37 +150,37 @@ async def quote(ctx):
 
 @bot.slash_command(guild_ids=[900712260937322526], name="hug", description="Give someone a hug")
 async def hug(ctx, member : Option(discord.Member, "Member to hug")):
-	viesti = discord.Embed(description = f"{ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂) ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Hug this person!")
 async def callbackname(ctx, member : discord.Member):
-	viesti = discord.Embed(description = f"{ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂) ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="kiss", description="Kiss someone")
 async def kiss(ctx, member : Option(discord.Member, "Member to kiss")):
-	viesti = discord.Embed(description = f"{ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶) ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Kiss this person!")
 async def callbackname(ctx, member : discord.Member):
-	viesti = discord.Embed(description = f"{ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶) ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="wave", description="Wave at someone")
 async def wave(ctx, member : Option(discord.Member, "Member to wave at")):
-	viesti = discord.Embed(description = f"{ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="gift", description="Give a gift to someone")
 async def gift(ctx, member : Option(discord.Member, "Gift receiver"), Gift : Option(str, "The gift you give")):
-	viesti = discord.Embed(description = f"{ctx.author.mention} gifted {member.mention} {Gift} (´・ω・)っ由", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} gifted {member.mention} {Gift} (´・ω・)っ由 ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Wave at this person!")
 async def callbackname(ctx, member : discord.Member):
-	viesti = discord.Embed(description = f"{ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ", color = c)
+	viesti = discord.Embed(description = f"♥ {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="cat", description="Send a cute cat picture")
@@ -186,7 +198,17 @@ async def bunny(ctx):
 	bunny = random.choice(BUNNY_IMAGE)
 	await ctx.respond(bunny)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors")
+@bot.slash_command(guild_ids=[900712260937322526], name="meme", description="Send a cute meme")
+async def meme(ctx):
+	mem = random.choice(MEMES)
+	await ctx.respond(mem)
+
+@bot.slash_command(guild_ids=[900712260937322526], name="cheerup", description="Send a cheerup meme")
+async def cheerup(ctx):
+	cheer = random.choice(CHEERUP)
+	await ctx.respond(cheer)
+
+@bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
 async def colors(ctx):
 	viesti = discord.Embed(title = "Color List", description = """
 (:red_circle:) Red
@@ -228,6 +250,23 @@ async def colorrole(ctx, color : Option(str, "The color role you want")):
 	await ctx.author.add_role(w_role)
 			
 	await ctx.respond(viesti_suc)
+
+@bot.slash_command(guild_ids=[900712260937322526], name="profile", description="Send someomes profile")
+async def profile(ctx, member : Option(discord.Member, "Member to show profile")):
+	auto = discord.Embed(title = f"{member.name}'s Comfy Profile'", description = member.mention, color = c)
+	auto.add_field(name='Sent',value=member.id,inline=True)
+	auto.set_thumbnail(url=member.avatar_url)
+	auto.add_field(name="Received", value=member.top_role.mention)
+	auto.set_footer(icon_url=ctx.author.avatar.url, text=f'Requested by {ctx.author.name}')
+	await ctx.send(embed=auto)
+
+@bot.slash_command(guild_ids=[900712260937322526], name="myprofile", description="Send own profile")
+async def myprofile(ctx, description : Option(str, "Profile description", required=False, default=None)):
+	auto = discord.Embed(title = f"{ctx.author.name}'s Comfy Profile'", description = f"This is {ctx.author.name}'s Comfy Profile!", color = c)
+	auto.add_field(name='Sent',value="")
+	auto.set_thumbnail(url=ctx.author.avatar_url)
+	auto.add_field(name="Received", value="")
+	await ctx.send(embed=auto)
 
 #BOT RUN
 
