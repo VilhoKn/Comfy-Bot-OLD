@@ -16,43 +16,43 @@ import random
 
 #SETUP
 
-with open("files/on_message_trigger_words.txt", "r") as f:
+with open("code/files/on_message_trigger_words.txt", "r") as f:
 	f_lines = f.readlines()
 	ON_MESSAGE_TRIGGER_WORDS = []
 	for i in f_lines:
 		ON_MESSAGE_TRIGGER_WORDS.append(i.strip("\n"))
 
-with open("files/quotes.txt", "r") as f:
+with open("code/files/quotes.txt", "r") as f:
 	f_lines = f.readlines()
 	QUOTES = []
 	for i in f_lines:
 		QUOTES.append(i.strip("\n"))
 
-with open("files/cat_image_links.txt", "r") as f:
+with open("code/files/cat_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CAT_IMAGE = []
 	for i in f_lines:
 		CAT_IMAGE.append(i.strip("\n"))
 
-with open("files/dog_image_links.txt", "r") as f:
+with open("code/files/dog_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	DOG_IMAGE = []
 	for i in f_lines:
 		DOG_IMAGE.append(i.strip("\n"))
 
-with open("files/bunny_image_links.txt", "r") as f:
+with open("code/files/bunny_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	BUNNY_IMAGE = []
 	for i in f_lines:
 		BUNNY_IMAGE.append(i.strip("\n"))
 
-with open("files/meme_links.txt", "r") as f:
+with open("code/files/meme_links.txt", "r") as f:
 	f_lines = f.readlines()
 	MEMES = []
 	for i in f_lines:
 		MEMES.append(i.strip("\n"))
 
-with open("files/cheerup_links.txt", "r") as f:
+with open("code/files/cheerup_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CHEERUP = []
 	for i in f_lines:
@@ -143,45 +143,74 @@ Text: Text "START" (without quotes) to 741-741.
 async def quote(ctx):
 	ce = random.choice(QUOTES)
 	quote, author = ce.split("-")
+	
+	viesti = discord.Embed(description = quote, color = c)
 	if author == "me":
 		author = "Comfy Bot"
-	viesti = discord.Embed(description = quote, color = c)
-	viesti.set_footer(text=author, icon_url=bot.user.avatar.url)
+	else:
+		viesti.set_footer(text=f"~ {author}")
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="hug", description="Give someone a hug")
 async def hug(ctx, member : Option(discord.Member, "Member to hug")):
-	await add_profile(ctx.author, member, )
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "hug")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Hug this person!")
 async def callbackname(ctx, member : discord.Member):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "hug")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="kiss", description="Kiss someone")
 async def kiss(ctx, member : Option(discord.Member, "Member to kiss")):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "kiss")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Kiss this person!")
 async def callbackname(ctx, member : discord.Member):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "kiss")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="wave", description="Wave at someone")
 async def wave(ctx, member : Option(discord.Member, "Member to wave at")):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "wave")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="gift", description="Give a gift to someone")
 async def gift(ctx, member : Option(discord.Member, "Gift receiver"), gift : Option(str, "The gift you give")):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "gift")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} gifted {member.mention} {gift} (´・ω・)っ由  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(guild_ids=[900712260937322526], name="Wave at this person!")
 async def callbackname(ctx, member : discord.Member):
+	await open_profile(ctx.author)
+	await open_profile(member)
+	if ctx.author.id != member.id: 
+		await add_profile(ctx.author, member, "wave")
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
@@ -209,6 +238,11 @@ async def meme(ctx):
 async def cheerup(ctx):
 	cheer = random.choice(CHEERUP)
 	await ctx.respond(cheer)
+
+@bot.slash_command(guild_ids=[900712260937322526], name="profilehelp", description="Sends a profile help message")
+async def profilehelp(ctx):
+	viesti = discord.Embed(title = "Profile help message", description = "Comfy Bot has 2 profile commands, `/profile` and `/myprofile`. These profiles are global across servers.\n\n`/profile` shows a members profile.\n\n`/myprofile` shows your own profile. You can also pass in a description to show on your profile. The description has a 150 character limit.\n\nThe profile shows the users sent and received actions. Actions are `/hug`, `/kiss`, `/wave` and `/gift`\n\nHope this helps designing your profile!", color = c)
+	await ctx.respond(embed=viesti, ephemeral=True)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
 async def colors(ctx):
@@ -278,6 +312,13 @@ Gifts : {r["gift"]}
 @bot.slash_command(guild_ids=[900712260937322526], name="myprofile", description="Sends your own profile")
 async def myprofile(ctx, description : Option(str, "Profile description", required=False, default=None)):
 	await open_profile(ctx.author)
+	if description:
+		if len(description) > 150:
+			viesti = discord.Embed( description = "Uh oh, description character limit is 150. Use `/profilehelp` to see more information about profiles", color = c)
+			await ctx.respond(embed=viesti, ephemeral=True)
+			return
+		st, rt, dt = await get_profile(ctx.author)
+		await store_profile(ctx.author, st, rt, description)
 	s, r, d = await get_profile(ctx.author)
 	auto = discord.Embed(title = f"{ctx.author.name}'s Comfy Profile", description = d, color = c)
 	auto.add_field(name='Sent',value=f"""
@@ -293,35 +334,33 @@ Kisses : {r["kiss"]}
 Waves : {r["wave"]}
 Gifts : {r["gift"]}
 """)
+	auto.set_footer(text="/profilehelp")
 	await ctx.respond(embed=auto)
 
 #FUNCTIONS
 
 async def get_data():
-	with open('json/profile_data.json', 'r') as f:
+	with open('code/json/profile_data.json', 'r') as f:
 		data = json.load(f)
 		return data
 
 async def dump_data(data):
-	with open('json/profile_data.json', 'w') as f:
+	with open('code/json/profile_data.json', 'w') as f:
 		return json.dump(data, f)
 
 async def open_profile(member):
 	data = await get_data()
 	g = str(member.guild.id)
 	u = str(member.id)
-	if g in data and u in data[g]:
+	if u in data:
 		return False
-	if g not in data:
-		data[g] = {}
-	if u not in data[g]:
-		data[g][u] = {}
-		data[g][u]["profile"] = {}
-		data[g][u]["profile"]["description"] = "This is my default Comfy Profile!"
-		data[g][u]["profile"]["sent"] = {}
-		data[g][u]["profile"]["sent"] = {"hug" : 0, "kiss" : 0, "wave" : 0, "gift" : 0}
-		data[g][u]["profile"]["received"] = {}
-		data[g][u]["profile"]["received"] = {"hug" : 0, "kiss" : 0, "wave" : 0, "gift" : 0}
+	data[u] = {}
+	data[u]["profile"] = {}
+	data[u]["profile"]["description"] = "This is my default Comfy Profile!"
+	data[u]["profile"]["sent"] = {}
+	data[u]["profile"]["sent"] = {"hug" : 0, "kiss" : 0, "wave" : 0, "gift" : 0}
+	data[u]["profile"]["received"] = {}
+	data[u]["profile"]["received"] = {"hug" : 0, "kiss" : 0, "wave" : 0, "gift" : 0}
 		
 	await dump_data(data)
 
@@ -329,9 +368,9 @@ async def get_profile(member):
 	data = await get_data()
 	g = str(member.guild.id)
 	u = str(member.id)
-	s = data[g][u]["profile"]["sent"]
-	r = data[g][u]["profile"]["received"]
-	d = data[g][u]["profile"]["description"]
+	s = data[u]["profile"]["sent"]
+	r = data[u]["profile"]["received"]
+	d = data[u]["profile"]["description"]
 	return s, r, d
 
 	
@@ -340,11 +379,11 @@ async def store_profile(member, s, r, d):
 	g = str(member.guild.id)
 	u = str(member.id)
 	if s:
-		data[g][u]["profile"]["sent"] = s
+		data[u]["profile"]["sent"] = s
 	if r:
-		data[g][u]["profile"]["received"] = r
+		data[u]["profile"]["received"] = r
 	if d:
-		data[g][u]["profile"]["description"] = d
+		data[u]["profile"]["description"] = d
 	await dump_data(data)
 
 async def add_profile(author, member, item):
@@ -354,7 +393,7 @@ async def add_profile(author, member, item):
 	ua = str(author.id)
 	s, r, d = await get_profile(member)
 	r[item] += 1
-	sa, ra, da = await get_profile(member)
+	sa, ra, da = await get_profile(author)
 	sa[item] += 1
 
 	await store_profile(member, s, r, d)
@@ -365,4 +404,4 @@ async def add_profile(author, member, item):
 
 #BOT RUN
 
-bot.run("OTAwNzA2MzMwMTgzMTAyNTI1.YXFOIw.KLEJOSuqv8_tOXlu0wkE90dvF8w")
+bot.run(os.environ['TOKEN'])
