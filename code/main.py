@@ -244,6 +244,11 @@ async def profilehelp(ctx):
 	viesti = discord.Embed(title = "Profile help message", description = "Comfy Bot has 2 profile commands, `/profile` and `/myprofile`. These profiles are global across servers.\n\n`/profile` shows a members profile.\n\n`/myprofile` shows your own profile. You can also pass in a description to show on your profile. The description has a 150 character limit.\n\nThe profile shows the users sent and received actions. Actions are `/hug`, `/kiss`, `/wave` and `/gift`\n\nHope this helps designing your profile!", color = c)
 	await ctx.respond(embed=viesti, ephemeral=True)
 
+@bot.slash_command(guild_ids=[900712260937322526], name="commandhelp", description="Sends a command help message")
+async def commandhelp(ctx):
+	viesti = discord.Embed(description = "You can find Comfy Bots commands list at [top.gg](https://top.gg/bot/270904126974590976)", color = c)
+	await ctx.respond(embed=viesti, ephemeral=True)
+
 @bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
 async def colors(ctx):
 	viesti = discord.Embed(title = "Color Role List", description = """
