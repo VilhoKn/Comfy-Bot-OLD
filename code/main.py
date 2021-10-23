@@ -16,43 +16,43 @@ import random
 
 #SETUP
 
-with open("code/files/on_message_trigger_words.txt", "r") as f:
+with open("files/on_message_trigger_words.txt", "r") as f:
 	f_lines = f.readlines()
 	ON_MESSAGE_TRIGGER_WORDS = []
 	for i in f_lines:
 		ON_MESSAGE_TRIGGER_WORDS.append(i.strip("\n"))
 
-with open("code/files/quotes.txt", "r") as f:
+with open("files/quotes.txt", "r") as f:
 	f_lines = f.readlines()
 	QUOTES = []
 	for i in f_lines:
 		QUOTES.append(i.strip("\n"))
 
-with open("code/files/cat_image_links.txt", "r") as f:
+with open("files/cat_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CAT_IMAGE = []
 	for i in f_lines:
 		CAT_IMAGE.append(i.strip("\n"))
 
-with open("code/files/dog_image_links.txt", "r") as f:
+with open("files/dog_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	DOG_IMAGE = []
 	for i in f_lines:
 		DOG_IMAGE.append(i.strip("\n"))
 
-with open("code/files/bunny_image_links.txt", "r") as f:
+with open("files/bunny_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	BUNNY_IMAGE = []
 	for i in f_lines:
 		BUNNY_IMAGE.append(i.strip("\n"))
 
-with open("code/files/meme_links.txt", "r") as f:
+with open("files/meme_links.txt", "r") as f:
 	f_lines = f.readlines()
 	MEMES = []
 	for i in f_lines:
 		MEMES.append(i.strip("\n"))
 
-with open("code/files/cheerup_links.txt", "r") as f:
+with open("files/cheerup_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CHEERUP = []
 	for i in f_lines:
@@ -248,10 +248,11 @@ async def profilehelp(ctx):
 async def help(ctx):
 	viesti = discord.Embed(title = "Comfy Bot Help Message", description = "Comfy Bot is made to make others happy!\n It has tons of fun commands you can use!\nComfy uses `/` slash commmands like most popular bots.", color = c)
 	viesti.add_field(name="Word detection", value="Comfy bot has word detection that sends\n hope you're okay messages to the users sending depressing messages.", inline=False)
-	viesti.add_field(name="Community", value="`/colors` `/colorrole` `/profile`\n`/myprofile` `/profilehelp` `/ineedhelp` `/quote`")
-	viesti.add_field(name="Images", value="`/cat` `/dog` `/bunny` `/meme` `/cheerup`")
-	viesti.add_field(name="Actions", value="`/hug`\n`/kiss`\n`/wave`\n`/gift`")
-	viesti.add_field(name="Quick Links", value="[Support Server](https://top.gg/bots)•[Invite Me](https://discord.com/api/oauth2/authorize?client_id=900706330183102525&permissions=8&scope=bot%20applications.commands)•[Vote for me](https://top.gg/bots)")
+	viesti.add_field(name=":frame_photo: Images", value="`/cat` `/dog` `/bunny`\n`/meme` `/cheerup`")
+	viesti.add_field(name=":busts_in_silhouette: Community", value="`/colors` `/colorrole`\n`/profile` `/myprofile`\n`/profilehelp`\n`/ineedhelp` `/quote`")
+	
+	viesti.add_field(name=":exclamation:Actions", value="`/hug`\n`/kiss`\n`/wave`\n`/gift`")
+	viesti.add_field(name="Quick Links", value="[Support Server](https://top.gg/bots) • [Invite Me](https://discord.com/api/oauth2/authorize?client_id=900706330183102525&permissions=8&scope=bot%20applications.commands) • [Vote for me](https://top.gg/bots)")
 	await ctx.respond(embed=viesti, ephemeral=True)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
@@ -350,12 +351,12 @@ Gifts : {r["gift"]}
 #FUNCTIONS
 
 async def get_data():
-	with open('code/json/profile_data.json', 'r') as f:
+	with open('json/profile_data.json', 'r') as f:
 		data = json.load(f)
 		return data
 
 async def dump_data(data):
-	with open('code/json/profile_data.json', 'w') as f:
+	with open('json/profile_data.json', 'w') as f:
 		return json.dump(data, f)
 
 async def open_profile(member):
@@ -414,4 +415,4 @@ async def add_profile(author, member, item):
 
 #BOT RUN
 
-bot.run(os.environ['TOKEN'])
+bot.run("OTAwNzA2MzMwMTgzMTAyNTI1.YXFOIw.6GZ97S7pcB5X5s5_pKxe0Bz_AWU")
