@@ -8,6 +8,7 @@ from discord.commands import Option
 
 #OTHER IMPORTS
 
+from web import keep_alive
 import datetime
 import os
 import json
@@ -95,7 +96,7 @@ async def on_message(message):
 	temp_msg = message.content.lower().split(" ")
 	for i in temp_msg:
 		if i in ON_MESSAGE_TRIGGER_WORDS:
-			viesti = discord.Embed(title="Depression Help", description = f"Hey, I saw you were talking about depressing things on {message.guild} and wanted to say that there are people that love and care about you! Hope you are okay.\n\nIf you want information about helplines for depressed and suicidal people use command `/ineedhelp`", color = c)
+			viesti = discord.Embed(title="Depression Help", description = f"Hey, I saw you were talking about sad things on {message.guild} and wanted to say that there are people that love and care about you! Hope you are okay.\n\nIf you want information about helplines for depressed and suicidal people use command `/ineedhelp`", color = c)
 			try:
 				channel = await message.author.create_dm()
 				await channel.send(embed=viesti)
@@ -105,7 +106,7 @@ async def on_message(message):
 
 #COMMANDS
 
-@bot.slash_command(guild_ids=[900712260937322526], name="ineedhelp", description="Sends an info message about depression helplines in dms")
+@bot.slash_command(name="ineedhelp", description="Sends an info message about depression helplines in dms")
 async def ineedhelp(ctx):
 	viesti = discord.Embed(title="I Need Help Helplines", description = f"Here is information about helplines for depressed and suicidal people", color = c)
 	viesti.add_field(name="Child Helplines (EU)", value="""
@@ -139,7 +140,7 @@ Text: Text "START" (without quotes) to 741-741.
 		await ctx.respond(embed=viesti, ephemeral=True)
 	return
 
-@bot.slash_command(guild_ids=[900712260937322526], name="quote", description="Sends a comfy quote")
+@bot.slash_command(name="quote", description="Sends a comfy quote")
 async def quote(ctx):
 	ce = random.choice(QUOTES)
 	quote, author = ce.split("-")
@@ -151,7 +152,7 @@ async def quote(ctx):
 		viesti.set_footer(text=f"~ {author}")
 	await ctx.respond(embed=viesti)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="hug", description="Give someone a hug")
+@bot.slash_command(name="hug", description="Give someone a hug")
 async def hug(ctx, member : Option(discord.Member, "Member to hug")):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -160,7 +161,7 @@ async def hug(ctx, member : Option(discord.Member, "Member to hug")):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.user_command(guild_ids=[900712260937322526], name="Hug this person!")
+@bot.user_command(name="Hug this person!")
 async def callbackname(ctx, member : discord.Member):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -169,7 +170,7 @@ async def callbackname(ctx, member : discord.Member):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="kiss", description="Kiss someone")
+@bot.slash_command(name="kiss", description="Kiss someone")
 async def kiss(ctx, member : Option(discord.Member, "Member to kiss")):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -178,7 +179,7 @@ async def kiss(ctx, member : Option(discord.Member, "Member to kiss")):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.user_command(guild_ids=[900712260937322526], name="Kiss this person!")
+@bot.user_command(name="Kiss this person!")
 async def callbackname(ctx, member : discord.Member):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -187,7 +188,7 @@ async def callbackname(ctx, member : discord.Member):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="wave", description="Wave at someone")
+@bot.slash_command(name="wave", description="Wave at someone")
 async def wave(ctx, member : Option(discord.Member, "Member to wave at")):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -196,7 +197,7 @@ async def wave(ctx, member : Option(discord.Member, "Member to wave at")):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="gift", description="Give a gift to someone")
+@bot.slash_command(name="gift", description="Give a gift to someone")
 async def gift(ctx, member : Option(discord.Member, "Gift receiver"), gift : Option(str, "The gift you give")):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -205,7 +206,7 @@ async def gift(ctx, member : Option(discord.Member, "Gift receiver"), gift : Opt
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} gifted {member.mention} {gift} (´・ω・)っ由  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.user_command(guild_ids=[900712260937322526], name="Wave at this person!")
+@bot.user_command(name="Wave at this person!")
 async def callbackname(ctx, member : discord.Member):
 	await open_profile(ctx.author)
 	await open_profile(member)
@@ -214,47 +215,47 @@ async def callbackname(ctx, member : discord.Member):
 	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
 	await ctx.respond(embed=viesti)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="cat", description="Send a cute cat picture")
+@bot.slash_command(name="cat", description="Send a cute cat picture")
 async def cat(ctx):
 	cat = random.choice(CAT_IMAGE)
 	await ctx.respond(cat)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="dog", description="Send a cute dog picture")
+@bot.slash_command(name="dog", description="Send a cute dog picture")
 async def dog(ctx):
 	dog = random.choice(DOG_IMAGE)
 	await ctx.respond(dog)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="bunny", description="Send a cute bunny picture")
+@bot.slash_command(name="bunny", description="Send a cute bunny picture")
 async def bunny(ctx):
 	bunny = random.choice(BUNNY_IMAGE)
 	await ctx.respond(bunny)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="meme", description="Send a cute meme")
+@bot.slash_command(name="meme", description="Send a cute meme")
 async def meme(ctx):
 	mem = random.choice(MEMES)
 	await ctx.respond(mem)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="cheerup", description="Send a cheerup meme")
+@bot.slash_command(name="cheerup", description="Send a cheerup meme")
 async def cheerup(ctx):
 	cheer = random.choice(CHEERUP)
 	await ctx.respond(cheer)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="profilehelp", description="Sends a profile help message")
+@bot.slash_command(name="profilehelp", description="Sends a profile help message")
 async def profilehelp(ctx):
 	viesti = discord.Embed(title = "Profile help message", description = "Comfy Bot has 2 profile commands, `/profile` and `/myprofile`. These profiles are global across servers.\n\n`/profile` shows a members profile.\n\n`/myprofile` shows your own profile. You can also pass in a description to show on your profile. The description has a 150 character limit.\n\nThe profile shows the users sent and received actions. Actions are `/hug`, `/kiss`, `/wave` and `/gift`\n\nHope this helps designing your profile!", color = c)
 	await ctx.respond(embed=viesti, ephemeral=True)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="help", description="Sends Comfy Bot help message")
+@bot.slash_command(name="help", description="Sends Comfy Bot help message")
 async def help(ctx):
 	viesti = discord.Embed(title = "Comfy Bot Help Message", description = "Comfy Bot is made to make others happy!\n It has tons of fun commands you can use!\nComfy uses `/` slash commmands like most popular bots.", color = c)
 	viesti.add_field(name="Word detection", value="Comfy bot has word detection that sends\n hope you're okay messages to the users sending depressing messages.", inline=False)
-	viesti.add_field(name="Community", value="`/colors` `/colorrole` `/profile`\n`/myprofile` `/profilehelp` `/ineedhelp` `/quote`")
-	viesti.add_field(name="Images", value="`/cat` `/dog` `/bunny` `/meme` `/cheerup`")
-	viesti.add_field(name="Actions", value="`/hug`\n`/kiss`\n`/wave`\n`/gift`")
-	viesti.add_field(name="Quick Links", value="[Support Server](https://top.gg/bots)•[Invite Me](https://discord.com/api/oauth2/authorize?client_id=900706330183102525&permissions=8&scope=bot%20applications.commands)•[Vote for me](https://top.gg/bots)")
+	viesti.add_field(name=":frame_photo: Images", value="`/cat` `/dog` `/bunny`\n`/meme` `/cheerup`")
+	viesti.add_field(name=":busts_in_silhouette: Community", value="`/colors` `/colorrole`\n`/profile` `/myprofile`\n`/profilehelp`\n`/ineedhelp` `/quote`")
+	viesti.add_field(name=":exclamation:Actions", value="`/hug`\n`/kiss`\n`/wave`\n`/gift`")
+	viesti.add_field(name="Quick Links", value="[Support Server](https://top.gg/servers/901214060740235275) • [Invite Me](https://discord.com/api/oauth2/authorize?client_id=900706330183102525&permissions=268437504&scope=bot%20applications.commands) • [Vote for me](https://top.gg/bot/900706330183102525)")
 	await ctx.respond(embed=viesti, ephemeral=True)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
+@bot.slash_command(name="colors", description="Sends a list of the colors for color roles")
 async def colors(ctx):
 	viesti = discord.Embed(title = "Color Role List", description = """
 (:red_circle:) Red
@@ -270,7 +271,7 @@ Use `/colorrole` to get the color role you want!
 	""", color = c)
 	await ctx.respond(embed=viesti, ephemeral=True)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="colorrole", description="Claim a color role")
+@bot.slash_command(name="colorrole", description="Claim a color role")
 async def colorrole(ctx, color : Option(str, "The color role you want")):
 	color_fix = color.lower()
 	if not color_fix in värit.keys():
@@ -299,7 +300,7 @@ async def colorrole(ctx, color : Option(str, "The color role you want")):
 			
 	await ctx.respond(embed=viesti_suc)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="profile", description="Send someomes profile")
+@bot.slash_command(name="profile", description="Send someomes profile")
 async def profile(ctx, member : Option(discord.Member, "Member to show profile")):
 	await open_profile(member)
 	s, r, d = await get_profile(member)
@@ -319,7 +320,7 @@ Gifts : {r["gift"]}
 """)
 	await ctx.respond(embed=auto)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="myprofile", description="Sends your own profile")
+@bot.slash_command(name="myprofile", description="Sends your own profile")
 async def myprofile(ctx, description : Option(str, "Profile description", required=False, default=None)):
 	await open_profile(ctx.author)
 	if description:
@@ -414,4 +415,5 @@ async def add_profile(author, member, item):
 
 #BOT RUN
 
+keep_alive()
 bot.run(os.environ['TOKEN'])
