@@ -244,9 +244,14 @@ async def profilehelp(ctx):
 	viesti = discord.Embed(title = "Profile help message", description = "Comfy Bot has 2 profile commands, `/profile` and `/myprofile`. These profiles are global across servers.\n\n`/profile` shows a members profile.\n\n`/myprofile` shows your own profile. You can also pass in a description to show on your profile. The description has a 150 character limit.\n\nThe profile shows the users sent and received actions. Actions are `/hug`, `/kiss`, `/wave` and `/gift`\n\nHope this helps designing your profile!", color = c)
 	await ctx.respond(embed=viesti, ephemeral=True)
 
-@bot.slash_command(guild_ids=[900712260937322526], name="commandhelp", description="Sends a command help message")
-async def commandhelp(ctx):
-	viesti = discord.Embed(description = "You can find Comfy Bots commands list at [top.gg](https://top.gg/bot/270904126974590976)", color = c)
+@bot.slash_command(guild_ids=[900712260937322526], name="help", description="Sends Comfy Bot help message")
+async def help(ctx):
+	viesti = discord.Embed(title = "Comfy Bot Help Message", description = "Comfy Bot is made to make others happy!\n It has tons of fun commands you can use!\nComfy uses `/` slash commmands like most popular bots.", color = c)
+	viesti.add_field(name="Word detection", value="Comfy bot has word detection that sends\n hope you're okay messages to the users sending depressing messages.", inline=False)
+	viesti.add_field(name="Community", value="`/colors` `/colorrole` `/profile`\n`/myprofile` `/profilehelp` `/ineedhelp` `/quote`")
+	viesti.add_field(name="Images", value="`/cat` `/dog` `/bunny` `/meme` `/cheerup`")
+	viesti.add_field(name="Actions", value="`/hug`\n`/kiss`\n`/wave`\n`/gift`")
+	viesti.add_field(name="Quick Links", value="[Support Server](https://top.gg/bots)•[Invite Me](https://discord.com/api/oauth2/authorize?client_id=900706330183102525&permissions=8&scope=bot%20applications.commands)•[Vote for me](https://top.gg/bots)")
 	await ctx.respond(embed=viesti, ephemeral=True)
 
 @bot.slash_command(guild_ids=[900712260937322526], name="colors", description="Sends a list of the colors for color roles")
