@@ -1,4 +1,4 @@
-
+	 
 #DISCORD IMPORTS
 
 import discord
@@ -320,6 +320,26 @@ Gifts : {r["gift"]}
 """)
 	await ctx.respond(embed=auto)
 
+@bot.user_command(name="Show profile")
+async def callbackname(ctx, member : discord.Member):
+	await open_profile(member)
+	s, r, d = await get_profile(member)
+	auto = discord.Embed(title = f"{member.name}'s Comfy Profile", description = d, color = c)
+	auto.add_field(name='Sent',value=f"""
+Hugs : {s["hug"]}
+Kisses : {s["kiss"]}
+Waves : {s["wave"]}
+Gifts : {s["gift"]}
+""")
+	auto.set_thumbnail(url=member.avatar.url)
+	auto.add_field(name="Received", value=f"""
+Hugs : {r["hug"]}
+Kisses : {r["kiss"]}
+Waves : {r["wave"]}
+Gifts : {r["gift"]}
+""")
+	await ctx.respond(embed=auto)
+
 @bot.slash_command(name="myprofile", description="Sends your own profile")
 async def myprofile(ctx, description : Option(str, "Profile description", required=False, default=None)):
 	await open_profile(ctx.author)
@@ -347,6 +367,8 @@ Gifts : {r["gift"]}
 """)
 	auto.set_footer(text="/profilehelp")
 	await ctx.respond(embed=auto)
+
+
 
 #FUNCTIONS
 
