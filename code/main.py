@@ -74,10 +74,6 @@ black = 0x000000
 white = 0xFFFFFF
 bot_role_c = 0xf774b0
 
-#EMBED VARIABLES
-
-
-
 #BOT VARIABLES
 
 bot = discord.Bot()
