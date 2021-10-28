@@ -158,7 +158,7 @@ async def hug(ctx, member : Option(discord.Member, "Member to hug")):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "hug")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(name="Hug this person!")
@@ -167,7 +167,7 @@ async def callbackname(ctx, member : discord.Member):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "hug")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} hugged {member.mention} (つˆ⌣ˆ)つ⊂(・﹏・⊂)  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(name="kiss", description="Kiss someone")
@@ -176,7 +176,7 @@ async def kiss(ctx, member : Option(discord.Member, "Member to kiss")):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "kiss")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(name="Kiss this person!")
@@ -185,7 +185,7 @@ async def callbackname(ctx, member : discord.Member):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "kiss")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} kissed {member.mention} (˶^ з^(◡‿◡˶)  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(name="wave", description="Wave at someone")
@@ -194,7 +194,7 @@ async def wave(ctx, member : Option(discord.Member, "Member to wave at")):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "wave")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(name="gift", description="Give a gift to someone")
@@ -203,7 +203,7 @@ async def gift(ctx, member : Option(discord.Member, "Gift receiver"), gift : Opt
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "gift")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} gifted {member.mention} {gift} (´・ω・)っ由  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} gifted {member.mention} {gift} (´・ω・)っ由  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.user_command(name="Wave at this person!")
@@ -212,7 +212,7 @@ async def callbackname(ctx, member : discord.Member):
 	await open_profile(member)
 	if ctx.author.id != member.id: 
 		await add_profile(ctx.author, member, "wave")
-	viesti = discord.Embed(description = f"♥  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ♥", color = c)
+	viesti = discord.Embed(description = f"  {ctx.author.mention} waved at {member.mention} (*・ω・)ﾉ  ", color = c)
 	await ctx.respond(embed=viesti)
 
 @bot.slash_command(name="cat", description="Send a cute cat picture")
