@@ -8,7 +8,7 @@ from discord.commands import Option
 
 #OTHER IMPORTS
 
-from web import keep_alive
+
 import datetime
 import os
 import json
@@ -17,43 +17,43 @@ import random
 
 #SETUP
 
-with open("code/files/on_message_trigger_words.txt", "r") as f:
+with open("files/on_message_trigger_words.txt", "r") as f:
 	f_lines = f.readlines()
 	ON_MESSAGE_TRIGGER_WORDS = []
 	for i in f_lines:
 		ON_MESSAGE_TRIGGER_WORDS.append(i.strip("\n"))
 
-with open("code/files/quotes.txt", "r") as f:
+with open("files/quotes.txt", "r") as f:
 	f_lines = f.readlines()
 	QUOTES = []
 	for i in f_lines:
 		QUOTES.append(i.strip("\n"))
 
-with open("code/files/cat_image_links.txt", "r") as f:
+with open("files/cat_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CAT_IMAGE = []
 	for i in f_lines:
 		CAT_IMAGE.append(i.strip("\n"))
 
-with open("code/files/dog_image_links.txt", "r") as f:
+with open("files/dog_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	DOG_IMAGE = []
 	for i in f_lines:
 		DOG_IMAGE.append(i.strip("\n"))
 
-with open("code/files/bunny_image_links.txt", "r") as f:
+with open("files/bunny_image_links.txt", "r") as f:
 	f_lines = f.readlines()
 	BUNNY_IMAGE = []
 	for i in f_lines:
 		BUNNY_IMAGE.append(i.strip("\n"))
 
-with open("code/files/meme_links.txt", "r") as f:
+with open("files/meme_links.txt", "r") as f:
 	f_lines = f.readlines()
 	MEMES = []
 	for i in f_lines:
 		MEMES.append(i.strip("\n"))
 
-with open("code/files/cheerup_links.txt", "r") as f:
+with open("files/cheerup_links.txt", "r") as f:
 	f_lines = f.readlines()
 	CHEERUP = []
 	for i in f_lines:
@@ -369,12 +369,12 @@ Gifts : {r["gift"]}
 #FUNCTIONS
 
 async def get_data():
-	with open('code/json/profile_data.json', 'r') as f:
+	with open('json/profile_data.json', 'r') as f:
 		data = json.load(f)
 		return data
 
 async def dump_data(data):
-	with open('code/json/profile_data.json', 'w') as f:
+	with open('json/profile_data.json', 'w') as f:
 		return json.dump(data, f)
 
 async def open_profile(member):
@@ -433,5 +433,5 @@ async def add_profile(author, member, item):
 
 #BOT RUN
 
-keep_alive()
-bot.run(os.environ['TOKEN'])
+
+bot.run("OTAwNzA2MzMwMTgzMTAyNTI1.YXFOIw.EVx8x0ncqgSv4cbFz6Qp9c9I5-I")
